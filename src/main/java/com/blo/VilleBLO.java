@@ -3,10 +3,12 @@ package com.blo;
 import com.dto.Ville;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface VilleBLO {
-    public ArrayList<Ville> getInfoVilles(String codePostal) throws SQLException;
+    public Ville getInfoVille(String codePostal) throws SQLException;
+
+    public List<Ville> getAllVilles() throws SQLException;
 
 
 
