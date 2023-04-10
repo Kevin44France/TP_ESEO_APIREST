@@ -1,13 +1,11 @@
 package com.blo;
 
 
-
 import com.dao.VilleDAO;
 import com.dto.Ville;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.ListView;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,19 +20,26 @@ public class VilleBLOImpl implements VilleBLO {
     public List<Ville> getAllVilles() throws SQLException {
         return villeDAO.findAllVilles();
     }
-    public Ville getInfoVille(String nomCommune) throws SQLException {
 
+    public Ville getInfoCommune(String nomCommune) throws SQLException {
         ArrayList<Ville> listVilles;
-
         listVilles = villeDAO.findAllVilles();
-        for (Ville ville : listVilles){
-            if (Objects.equals(ville.getNomCommune(), nomCommune)){
-                System.out.println("found");
+        for (Ville ville : listVilles) {
+            if (Objects.equals(ville.getNomCommune(), nomCommune)) {
                 return ville;
             }
-
         }
-
-
         return null;
-    }}
+    }
+
+    public Ville getInfoCodePostal(String codePostal) throws SQLException {
+        ArrayList<Ville> listVilles;
+        listVilles = villeDAO.findAllVilles();
+        for (Ville ville : listVilles) {
+            if (Objects.equals(ville.getCodePostal(), codePostal)) {
+                return ville;
+            }
+        }
+        return null;
+    }
+}
