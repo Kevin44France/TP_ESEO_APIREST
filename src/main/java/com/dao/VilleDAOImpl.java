@@ -61,21 +61,58 @@ public class VilleDAOImpl implements VilleDAO {
         return newVille;
     }
 
-    public String modifyVilleCodePostal(String nomCommune, String codePostal) throws SQLException {
+    public String modifyCodePostal(String code_insee, String codePostal) throws SQLException {
 
         Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-        String sql = "UPDATE ville_france SET Code_Postal = ? WHERE Nom_commune = ?;";
+        String sql = "UPDATE ville_france SET Code_postal = ? WHERE " +
+                "Code_commune_INSEE= ?;";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
 
         stmt.setString(1, codePostal);
-        stmt.setString(2, nomCommune);
-
+        stmt.setString(2, code_insee);
         stmt.executeUpdate();
         conn.close();
-        return ("Nouveau code postal = " + codePostal + " pour " + nomCommune);
+        return ("Nouveau code postal = " + codePostal + " pour " + code_insee);
     }
+
+    public String modifyNomCommune(String code_insee, String nouveau_nom) throws SQLException {
+        Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        String sql = "UPDATE ville_france SET Nom_commune = ? WHERE " +
+                "Code_commune_INSEE = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, nouveau_nom);
+        stmt.setString(2, code_insee);
+        stmt.executeUpdate();
+        conn.close();
+        return "Le nom de la commune avec le code INSEE " + code_insee + " a été modifié en " + nouveau_nom;
+    }
+
+    public String modifyLibelle(String code_insee, String nouveau_libelle) throws SQLException {
+        Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        String sql = "UPDATE ville_france SET Libelle_acheminement = ? WHERE " +
+                "Code_commune_INSEE = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, nouveau_libelle);
+        stmt.setString(2, code_insee);
+        stmt.executeUpdate();
+        conn.close();
+        return "Le libellé de la commune avec le code INSEE " + code_insee + " a été modifié en " + nouveau_libelle;
+    }
+
+    public String modifyLigne(String code_insee, String ligne) throws SQLException {
+        Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        String sql = "UPDATE ville_france SET Ligne_5 = ? WHERE " +
+                "Code_commune_INSEE = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, ligne);
+        stmt.setString(2, code_insee);
+        stmt.executeUpdate();
+        conn.close();
+        return "Le chemin d'acheminement de la commune avec le code INSEE " + code_insee + " a été modifié en " + ligne;
+    }
+
 
     public Ville modifyVille(String codeCommune, String nomCommune,
                              String codePostal) throws SQLException {

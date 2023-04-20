@@ -13,5 +13,6 @@ public interface VilleBLO {
 
     Ville getInfoCodePostal(String codePostal) throws SQLException;
 
+    Ville getInfoCodeCommune(String codeCommune) throws SQLException;
 
 }

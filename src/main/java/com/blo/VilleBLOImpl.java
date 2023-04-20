@@ -32,6 +32,17 @@ public class VilleBLOImpl implements VilleBLO {
         return null;
     }
 
+    public Ville getInfoCodeCommune(String codeCommune) throws SQLException {
+        ArrayList<Ville> listVilles;
+        listVilles = villeDAO.findAllVilles();
+        for (Ville ville : listVilles) {
+            if (Objects.equals(ville.getCodeCommune(), codeCommune)) {
+                return ville;
+            }
+        }
+        return null;
+    }
+
     public Ville getInfoCodePostal(String codePostal) throws SQLException {
         ArrayList<Ville> listVilles;
         listVilles = villeDAO.findAllVilles();

@@ -24,10 +24,32 @@ public class VilleController {
         return villeDAO.addNewVille(ville);
     }
 
-    @PostMapping(value = "/commune/modifyCodePostal")
-    public String postModifyVille(@RequestParam String nomCommune,
-                                  @RequestParam String codePostal) throws SQLException {
-        return villeDAO.modifyVilleCodePostal(nomCommune, codePostal);
+    @PostMapping(value = "/modifyCodePostal")
+    public Ville postModifyCodePostal(@RequestParam String codeCommune,
+                                      @RequestParam String codePostal) throws SQLException {
+        villeDAO.modifyCodePostal(codeCommune, codePostal);
+        return villeBLOService.getInfoCodeCommune(codeCommune);
+    }
+
+    @PostMapping(value = "/modifyNomCommune")
+    public Ville postModifyNomCommune(@RequestParam String codeCommune,
+                                      @RequestParam String nomCommune) throws SQLException {
+        villeDAO.modifyNomCommune(codeCommune, nomCommune);
+        return villeBLOService.getInfoCodeCommune(codeCommune);
+    }
+
+    @PostMapping(value = "/modifyLibelle")
+    public Ville postModifyLibelle(@RequestParam String codeCommune,
+                                   @RequestParam String libelle) throws SQLException {
+        villeDAO.modifyLibelle(codeCommune, libelle);
+        return villeBLOService.getInfoCodeCommune(codeCommune);
+    }
+
+    @PostMapping(value = "/modifyLigne")
+    public Ville postModifyLigne(@RequestParam String codeCommune,
+                                 @RequestParam String ligne) throws SQLException {
+        villeDAO.modifyLigne(codeCommune, ligne);
+        return villeBLOService.getInfoCodeCommune(codeCommune);
     }
 
     @GetMapping(value = "/villes")
@@ -43,6 +65,11 @@ public class VilleController {
     @GetMapping("/codePostal")
     public Ville getCodePostal(@RequestParam String codePostal) throws SQLException {
         return villeBLOService.getInfoCodePostal(codePostal);
+    }
+
+    @GetMapping("/codeCommune")
+    public Ville getCodeCommune(@RequestParam String codeCommune) throws SQLException {
+        return villeBLOService.getInfoCodeCommune(codeCommune);
     }
 
     @PutMapping("/modifyVille")
